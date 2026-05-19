@@ -3,7 +3,7 @@ import Hero from "@/components/sections/Hero";
 import PlatformStrip from "@/components/sections/PlatformStrip";
 import LogoMarquee from "@/components/sections/LogoMarquee";
 import HeroCollage from "@/components/sections/HeroCollage";
-import WhatWeDo from "@/components/sections/WhatWeDo";
+import CapabilityNetwork from "@/components/sections/CapabilityNetwork";
 import HowWeWork from "@/components/sections/HowWeWork";
 import AnchorPhilosophy from "@/components/sections/AnchorPhilosophy";
 import CinematicBreak from "@/components/sections/CinematicBreak";
@@ -26,7 +26,7 @@ export default function Home() {
         <PlatformStrip />
         <LogoMarquee />
         <HeroCollage />
-        <WhatWeDo />
+        <CapabilityNetwork />
         <HowWeWork />
         <AnchorPhilosophy />
         <CinematicBreak />
