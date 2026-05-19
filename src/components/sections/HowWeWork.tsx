@@ -1,7 +1,8 @@
 import Container from "./_Container";
 
-// HowWeWork / Process explainer — locked v3 carry-over per §2.
-// Outcome-based subtitles, three steps. No marketing-funnel cliches.
+// HowWeWork — flipped to CREAM. Pairs with WhatWeDo above to form a
+// 2-section cream "services + process" block per Superside §1.1.
+// Audit ref: SUPERSIDE-AUDIT alternation pattern — blocks of 2-3 per colour.
 
 const STEPS: Array<{ n: string; title: string; outcome: string; body: string }> = [
   {
@@ -31,14 +32,21 @@ export default function HowWeWork() {
   return (
     <section
       id="how-we-work"
-      className="bg-canvas"
-      style={{ paddingBlock: "var(--gap-10xl)" }}
+      style={{
+        background: "var(--canvas-light)",
+        paddingBlock: "var(--gap-10xl)",
+      }}
     >
       <Container>
-        <p className="eyebrow text-text-muted mb-6">How we work</p>
+        <p className="eyebrow mb-6" style={{ color: "var(--text-on-light-muted)" }}>How we work</p>
         <h2
-          className="font-sans text-text-strong max-w-3xl text-balance"
-          style={{ fontSize: "clamp(32px, 4.5vw, 60px)", lineHeight: 1.1, fontWeight: 400 }}
+          className="font-sans max-w-3xl text-balance"
+          style={{
+            fontSize: "clamp(32px, 4.5vw, 60px)",
+            lineHeight: 1.1,
+            fontWeight: 400,
+            color: "var(--text-on-light)",
+          }}
         >
           Three steps. <em>Outcome-based</em>, not theatre.
         </h2>
@@ -47,16 +55,33 @@ export default function HowWeWork() {
           {STEPS.map((s) => (
             <li key={s.n} className="relative">
               <p
-                className="font-display italic text-text-faint"
-                style={{ fontSize: "clamp(48px, 5vw, 72px)", lineHeight: 1 }}
+                className="font-display italic"
+                style={{
+                  fontSize: "clamp(48px, 5vw, 72px)",
+                  lineHeight: 1,
+                  color: "var(--text-on-light-faint)",
+                }}
               >
                 {s.n}
               </p>
-              <h3 className="mt-4 text-text-strong" style={{ fontSize: "clamp(22px, 2vw, 28px)", lineHeight: 1.2, fontWeight: 400 }}>
+              <h3
+                className="mt-4"
+                style={{
+                  fontSize: "clamp(22px, 2vw, 28px)",
+                  lineHeight: 1.2,
+                  fontWeight: 400,
+                  color: "var(--text-on-light)",
+                }}
+              >
                 {s.title}
               </h3>
-              <p className="mt-3 text-text-muted text-sm uppercase tracking-[0.12em]">{s.outcome}</p>
-              <p className="mt-4 text-text-body">{s.body}</p>
+              <p
+                className="mt-3 text-sm uppercase tracking-[0.12em]"
+                style={{ color: "var(--text-on-light-muted)" }}
+              >
+                {s.outcome}
+              </p>
+              <p className="mt-4" style={{ color: "var(--text-on-light)" }}>{s.body}</p>
             </li>
           ))}
         </ol>

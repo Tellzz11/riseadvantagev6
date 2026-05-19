@@ -104,7 +104,8 @@ function Tile({
   return (
     <figure
       className={[
-        "relative overflow-hidden rounded-2xl border border-border bg-canvas",
+        "group relative overflow-hidden rounded-2xl border border-border bg-canvas",
+        "transition-transform duration-500 ease-out hover:-translate-y-1",
         wide ? "w-full aspect-[16/6] md:aspect-[21/6]" : span ?? "",
       ].join(" ").trim()}
     >
@@ -113,7 +114,7 @@ function Tile({
         alt={alt}
         fill
         sizes={wide ? "100vw" : "(min-width: 1024px) 50vw, 100vw"}
-        className="object-cover"
+        className="object-cover transition-transform duration-[1.4s] ease-out group-hover:scale-[1.05]"
         priority={priority}
       />
       <div

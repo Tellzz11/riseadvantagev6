@@ -13,7 +13,7 @@ export default function CinematicBreak() {
       style={{ paddingBlock: "var(--gap-11xl)" }}
     >
       <video
-        className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-40"
+        className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-90"
         autoPlay
         muted
         loop
@@ -26,11 +26,13 @@ export default function CinematicBreak() {
         <source src="/scroll-cinematic.mp4" type="video/mp4" />
       </video>
 
+      {/* Radial vignette so the centred headline reads, but the cinematic
+          stays fully visible at top + bottom edges. */}
       <div
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            "linear-gradient(180deg, color-mix(in oklab, var(--canvas-deep) 45%, transparent) 0%, color-mix(in oklab, var(--canvas-deep) 20%, transparent) 50%, var(--canvas-deep) 100%)",
+            "radial-gradient(ellipse at center, color-mix(in oklab, var(--canvas-deep) 55%, transparent) 0%, color-mix(in oklab, var(--canvas-deep) 25%, transparent) 50%, transparent 100%)",
         }}
         aria-hidden
       />

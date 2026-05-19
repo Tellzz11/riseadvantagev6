@@ -10,12 +10,34 @@
    Replaces BD-004 amber/oxblood from v5. ────────────────────────────────── */
 
 :root {
-  /* canvas — deep teal-green base + 2 near-stops for bleed */
-  --canvas:           #0A211F;
-  --canvas-soft:      #0E2725;   /* card/tile bg, section bleed */
-  --canvas-deep:      #061715;   /* hero backdrop, anchor moments */
-  --surface:          #122B29;   /* card surface */
+  /* canvas — deep teal-green base + near-stops + light variant for alternation */
+  --canvas:           #0A211F;   /* dark base */
+  --canvas-soft:      #0E2725;   /* dark + 1 step */
+  --canvas-deep:      #061715;   /* dark hero backdrop */
+  --surface:          #122B29;   /* dark card */
   --surface-hover:    #163230;
+
+  /* LIGHT surface — cream, used for true section alternation per
+     SUPERSIDE-AUDIT §1.1 (the dark↔light cut is what creates the
+     "one continuous piece" feel). Cream skews warm-neutral so it
+     reads as paper, not bright white. */
+  --canvas-light:        #F2EFE6;   /* warm cream — section variant */
+  --canvas-light-soft:   #EBE7D9;   /* cream + 1 step (tile bg on cream sections) */
+  --text-on-light:       #0A211F;   /* deep teal — body text on cream */
+  --text-on-light-muted: #5A6B5F;   /* muted teal-gray on cream */
+  --text-on-light-faint: #A8B0A4;   /* faint on cream */
+
+  /* TONAL GREEN RAMP — for writing + boxes + accents across both
+     dark and cream sections. Adds depth so the page isn't monotone
+     teal-on-teal. Mirrors Superside's bor-primary/tertiary ramps
+     (SUPERSIDE-AUDIT §5.1). */
+  --moss:        #4F756E;   /* muted sage on dark — eyebrows, muted text */
+  --moss-soft:   #6E948C;   /* lighter moss for borders on dark */
+  --moss-deep:   #2B4845;   /* deeper sage for ghost numerals on dark */
+  --pine:        #163230;   /* slightly lifted box bg on dark */
+  --pine-deep:   #0F2A28;   /* one step in from pine */
+  --sage:        #C7D2BE;   /* sage-tinted off-white — soft headline on dark */
+  --eucalyptus:  #8FB0A4;   /* mid-tone soft accent */
 
   /* accent — off-white rim/line/highlight */
   --accent-rgb:       247 249 242;
@@ -101,6 +123,22 @@
   --color-surface:       var(--surface);
   --color-surface-hover: var(--surface-hover);
 
+  /* light alternation */
+  --color-canvas-light:        var(--canvas-light);
+  --color-canvas-light-soft:   var(--canvas-light-soft);
+  --color-text-on-light:       var(--text-on-light);
+  --color-text-on-light-muted: var(--text-on-light-muted);
+  --color-text-on-light-faint: var(--text-on-light-faint);
+
+  /* tonal greens */
+  --color-moss:        var(--moss);
+  --color-moss-soft:   var(--moss-soft);
+  --color-moss-deep:   var(--moss-deep);
+  --color-pine:        var(--pine);
+  --color-pine-deep:   var(--pine-deep);
+  --color-sage:        var(--sage);
+  --color-eucalyptus:  var(--eucalyptus);
+
   /* accent + text */
   --color-accent:        var(--accent);
   --color-accent-soft:   var(--accent-soft);
@@ -169,14 +207,16 @@
     font-size: 1.05em;
   }
 
-  /* eyebrow utility — 14-16px uppercase, 0.15em tracking */
+  /* eyebrow utility — 14-16px uppercase, 0.15em tracking.
+     Default eyebrow on dark surfaces now uses --moss (sage-green)
+     instead of flat grey, per the audit + Theo's note. */
   .eyebrow {
     font-family: var(--font-sans);
     font-size: 0.875rem;       /* 14px */
     font-weight: 400;
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: var(--text-muted);
+    color: var(--moss);
   }
   .eyebrow-lg {
     font-size: 1rem;            /* 16px */

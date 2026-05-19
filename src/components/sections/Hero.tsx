@@ -1,21 +1,50 @@
-// Hero — locked v5 carry-over (3D crystal prism). v6 keeps the cinematic
-// backdrop hook (mp4/webm) but re-themed to BD-005 surfaces. For now the
-// `<video>` slot renders the v5 source if present; falls back to canvas-deep
-// gradient so the page reads correctly while we re-render the asset under
-// the new palette.
+"use client";
 
+// Hero — locked v5 carry-over (3D crystal prism / atelier form). v6
+// re-rendered under BD-005 (Kling 3.0 silk-drape on deep teal field).
+// Subtle scroll parallax: video translates up slowly as you scroll,
+// creating depth without big animation. Respects reduced-motion.
+
+import { useEffect, useRef } from "react";
 import Container from "./_Container";
 
 export default function Hero() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const video = videoRef.current;
+    if (!video) return;
+
+    let raf = 0;
+    const onScroll = () => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        // Translate video up at ~30% scroll speed for parallax depth.
+        const y = window.scrollY;
+        const max = window.innerHeight;
+        const offset = Math.min(y * 0.3, max * 0.3);
+        video.style.transform = `translate3d(0, -${offset}px, 0) scale(1.05)`;
+      });
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      cancelAnimationFrame(raf);
+    };
+  }, []);
+
   return (
     <section
       className="relative isolate overflow-hidden bg-canvas-deep"
-      style={{ paddingBlock: "var(--gap-11xl)" }}
+      style={{ paddingBlock: "var(--gap-11xl)", minHeight: "90vh" }}
     >
-      {/* Backdrop video — slot is wired, source comes from public/hero.{mp4,webm}.
-          Will be re-rendered through Higgsfield CLI under BD-005 lighting later. */}
       <video
-        className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-50"
+        ref={videoRef}
+        className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-95"
+        style={{ willChange: "transform" }}
         autoPlay
         muted
         loop
@@ -28,25 +57,30 @@ export default function Hero() {
         <source src="/hero.mp4" type="video/mp4" />
       </video>
 
-      {/* Soft floor wash so the headline reads against the video */}
+      {/* Soft headline wash — left + bottom only, video stays visible right/top */}
       <div
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            "linear-gradient(180deg, color-mix(in oklab, var(--canvas-deep) 65%, transparent) 0%, color-mix(in oklab, var(--canvas-deep) 35%, transparent) 50%, var(--canvas-deep) 100%)",
+            "linear-gradient(105deg, color-mix(in oklab, var(--canvas-deep) 78%, transparent) 0%, color-mix(in oklab, var(--canvas-deep) 35%, transparent) 45%, transparent 70%)",
         }}
         aria-hidden
       />
 
       <Container className="relative z-10">
-        <p className="eyebrow text-text-muted mb-6">A UK marketing agency</p>
+        <p className="eyebrow mb-6">A UK marketing agency</p>
 
-        <h1 className="font-sans text-text-strong text-balance" style={{ fontSize: "clamp(40px, 6.2vw, 88px)", lineHeight: 1.05, fontWeight: 400, letterSpacing: "-0.01em" }}>
-          Campaigns today.{" "}
-          <em>Capability tomorrow.</em>
+        <h1
+          className="font-sans text-text-strong text-balance"
+          style={{ fontSize: "clamp(40px, 6.2vw, 88px)", lineHeight: 1.05, fontWeight: 400, letterSpacing: "-0.01em" }}
+        >
+          Campaigns today. <em>Capability tomorrow.</em>
         </h1>
 
-        <p className="mt-8 max-w-2xl text-text-body" style={{ fontSize: "clamp(16px, 1.4vw, 20px)", lineHeight: 1.5 }}>
+        <p
+          className="mt-8 max-w-2xl text-text-body"
+          style={{ fontSize: "clamp(16px, 1.4vw, 20px)", lineHeight: 1.5 }}
+        >
           We run the work and build the system that compounds it. Founder-led,
           agent-augmented, no fluff.
         </p>

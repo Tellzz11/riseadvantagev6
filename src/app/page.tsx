@@ -13,6 +13,7 @@ import RiseGuarantee from "@/components/sections/RiseGuarantee";
 import CertifiedPartners from "@/components/sections/CertifiedPartners";
 import ContactForm from "@/components/sections/ContactForm";
 import Footer from "@/components/sections/Footer";
+import WhatYouTakeWithYou from "@/components/sections/WhatYouTakeWithYou";
 
 // Homepage assembly — BD-005, zero dividers, alternating canvas surfaces.
 // Order per CARRY-OVER §2 + autonomous build elevation 2026-05-19.
@@ -32,6 +33,7 @@ export default function Home() {
         <SelectedWork />
         <OrlaTestimonial />
         <RiseGuarantee />
+        <WhatYouTakeWithYou />
         <CertifiedPartners />
         <ContactForm />
       </main>

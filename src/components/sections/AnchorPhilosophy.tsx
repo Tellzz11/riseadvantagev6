@@ -23,7 +23,7 @@ export default function AnchorPhilosophy() {
             style={{ fontSize: "clamp(36px, 5vw, 72px)", lineHeight: 1.05, fontWeight: 400, letterSpacing: "-0.01em" }}
           >
             Most agencies sell campaigns.{" "}
-            <em>We sell the gap between what your account is doing and what it could.</em>
+            <em style={{ color: "var(--sage)" }}>We sell the gap between what your account is doing and what it could.</em>
           </h2>
 
           <div className="md:col-span-5 md:col-start-8 space-y-6 text-text-body">

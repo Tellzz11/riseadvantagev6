@@ -1,8 +1,9 @@
 import Container from "./_Container";
 
-// WhatWeDo — the four service categories. Atelier card grid: thin border,
-// no shadow, canvas-soft surface, hover lifts to canvas-soft-hover.
-// Audit ref: SUPERSIDE-AUDIT §1.4 (systems-not-cards).
+// WhatWeDo — flipped to CREAM section per Superside audit §1.1.
+// True dark↔light alternation is what creates the "one continuous piece"
+// feel. Cream surface, deep-teal text. Sits between dark HeroCollage and
+// dark HowWeWork to create a sharp cut.
 
 const SERVICES: Array<{ label: string; title: string; body: string }> = [
   {
@@ -33,27 +34,66 @@ const SERVICES: Array<{ label: string; title: string; body: string }> = [
 
 export default function WhatWeDo() {
   return (
-    <section id="what-we-do" className="bg-canvas-soft" style={{ paddingBlock: "var(--gap-10xl)" }}>
+    <section
+      id="what-we-do"
+      style={{
+        background: "var(--canvas-light)",
+        color: "var(--text-on-light)",
+        paddingBlock: "var(--gap-10xl)",
+      }}
+    >
       <Container>
-        <p className="eyebrow text-text-muted mb-6">What we do</p>
+        <p
+          className="eyebrow mb-6"
+          style={{ color: "var(--text-on-light-muted)" }}
+        >
+          What we do
+        </p>
         <h2
-          className="font-sans text-text-strong text-balance max-w-3xl"
-          style={{ fontSize: "clamp(32px, 4.5vw, 60px)", lineHeight: 1.1, fontWeight: 400 }}
+          className="font-sans text-balance max-w-3xl"
+          style={{
+            fontSize: "clamp(32px, 4.5vw, 60px)",
+            lineHeight: 1.1,
+            fontWeight: 400,
+            color: "var(--text-on-light)",
+          }}
         >
           Four practices, <em>one team</em>, one ledger.
         </h2>
 
-        <div className="mt-14 grid gap-px bg-border md:grid-cols-2">
+        <div
+          className="mt-14 grid gap-px md:grid-cols-2"
+          style={{ background: "var(--text-on-light-faint)" }}
+        >
           {SERVICES.map((s) => (
             <article
               key={s.label}
-              className="bg-canvas-soft p-8 md:p-10 transition-colors hover:bg-[color:var(--surface)]"
+              className="p-8 md:p-10 transition-colors"
+              style={{ background: "var(--canvas-light)" }}
             >
-              <p className="eyebrow text-text-muted">{s.label}</p>
-              <h3 className="mt-4 text-text-strong" style={{ fontSize: "clamp(22px, 2vw, 28px)", lineHeight: 1.2, fontWeight: 400 }}>
+              <p
+                className="eyebrow"
+                style={{ color: "var(--text-on-light-muted)" }}
+              >
+                {s.label}
+              </p>
+              <h3
+                className="mt-4"
+                style={{
+                  fontSize: "clamp(22px, 2vw, 28px)",
+                  lineHeight: 1.2,
+                  fontWeight: 400,
+                  color: "var(--text-on-light)",
+                }}
+              >
                 {s.title}
               </h3>
-              <p className="mt-4 text-text-body max-w-md">{s.body}</p>
+              <p
+                className="mt-4 max-w-md"
+                style={{ color: "var(--text-on-light)" }}
+              >
+                {s.body}
+              </p>
             </article>
           ))}
         </div>
