@@ -25,9 +25,9 @@ const channels = ["Meta / Facebook", "Google Ads", "TikTok", "Organic / SEO", "O
 const schema = z.object({
   name: z.string().min(2, "Your name, please."),
   email: z.string().email("That doesn't look right — try again?"),
-  revenue: z.enum(revenueBands),
+  revenue: z.enum(revenueBands, { error: "Pick a band — roughly is fine." }),
   tried: z.string().min(8, "Even one sentence helps."),
-  channel: z.enum(channels),
+  channel: z.enum(channels, { error: "Pick the closest one." }),
   message: z.string().min(12, "Give us a bit more to go on."),
   website: z.string().max(0).optional(), // honeypot — must be empty
 });
@@ -85,21 +85,33 @@ export default function ContactForm() {
   }
 
   return (
-    <section id="contact" className="bg-canvas-deep" style={{ paddingBlock: "var(--gap-11xl)" }}>
+    <section
+      id="contact"
+      style={{ background: "var(--canvas-sage)", paddingBlock: "var(--gap-11xl)" }}
+    >
       <Container className="max-w-2xl mx-auto">
-        <p className="eyebrow text-text-muted mb-6">Talk to us</p>
+        <p className="eyebrow mb-6" style={{ color: "var(--text-on-light-muted)" }}>
+          Talk to us
+        </p>
         <h2
-          className="font-sans text-text-strong text-balance"
-          style={{ fontSize: "clamp(32px, 4.5vw, 56px)", lineHeight: 1.1, fontWeight: 400, letterSpacing: "-0.01em" }}
+          className="font-sans text-balance"
+          style={{
+            fontSize: "clamp(32px, 4.5vw, 56px)",
+            lineHeight: 1.1,
+            fontWeight: 400,
+            letterSpacing: "-0.01em",
+            color: "var(--text-on-light)",
+          }}
         >
           Tell us what you&rsquo;re working with. <em>We&rsquo;ll reply within one working day.</em>
         </h2>
 
-        {/* Progress */}
-        <div className="mt-10 mb-8 flex items-center gap-4 text-sm text-text-muted">
-          <span className={step === 1 ? "text-text-strong" : ""}>01 — You</span>
-          <span className="flex-1 h-px bg-border" />
-          <span className={step === 2 ? "text-text-strong" : ""}>02 — The work</span>
+        {/* Progress — dark on-light family: this section sits on sage, so the
+            off-white text tokens are illegible here (audit 2026-06-10). */}
+        <div className="mt-10 mb-8 flex items-center gap-4 text-sm text-text-on-light-muted">
+          <span className={step === 1 ? "text-text-on-light font-medium" : ""}>01 — You</span>
+          <span className="flex-1 h-px bg-text-on-light/20" />
+          <span className={step === 2 ? "text-text-on-light font-medium" : ""}>02 — The work</span>
         </div>
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6" noValidate>
@@ -145,11 +157,7 @@ export default function ContactForm() {
               </Field>
 
               <div className="flex justify-end pt-2">
-                <button
-                  type="button"
-                  onClick={onNext}
-                  className="inline-flex items-center gap-2 rounded-full px-7 py-3 bg-accent text-canvas font-medium hover:bg-accent/90 transition-colors"
-                >
+                <button type="button" onClick={onNext} className="pill-cta-lime">
                   Next <span aria-hidden>→</span>
                 </button>
               </div>
@@ -187,14 +195,14 @@ export default function ContactForm() {
                 <button
                   type="button"
                   onClick={() => setStep(1)}
-                  className="text-text-muted hover:text-text-strong transition-colors text-sm"
+                  className="text-text-on-light-muted hover:text-text-on-light transition-colors text-sm"
                 >
                   ← Back
                 </button>
                 <button
                   type="submit"
                   disabled={status === "submitting"}
-                  className="inline-flex items-center gap-2 rounded-full px-7 py-3 bg-accent text-canvas font-medium hover:bg-accent/90 transition-colors disabled:opacity-60"
+                  className="pill-cta-lime disabled:opacity-60"
                 >
                   {status === "submitting" ? "Sending…" : "Send it"}
                 </button>
@@ -203,12 +211,12 @@ export default function ContactForm() {
           )}
 
           {status === "ok" && serverMsg && (
-            <p className="mt-6 rounded-lg border border-border-strong bg-canvas-soft p-4 text-text-strong">
+            <p className="mt-6 rounded-2xl border border-text-on-light/20 bg-canvas-light p-4 text-text-on-light">
               {serverMsg}
             </p>
           )}
           {status === "error" && serverMsg && (
-            <p className="mt-6 rounded-lg border border-border bg-canvas-soft p-4 text-text-body">
+            <p className="mt-6 rounded-2xl border border-text-on-light/30 bg-canvas-light p-4 text-text-on-light font-medium">
               {serverMsg}
             </p>
           )}
@@ -229,9 +237,9 @@ function Field({
 }) {
   return (
     <label className="block">
-      <span className="block text-sm text-text-muted mb-2 uppercase tracking-[0.12em]">{label}</span>
+      <span className="block text-sm text-text-on-light-muted mb-2 uppercase tracking-[0.12em]">{label}</span>
       {children}
-      {error && <span className="mt-2 block text-xs text-text-body">{error}</span>}
+      {error && <span className="mt-2 block text-xs font-medium text-text-on-light">{error}</span>}
     </label>
   );
 }

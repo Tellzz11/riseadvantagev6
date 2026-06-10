@@ -11,22 +11,34 @@ export default function AnchorPhilosophy() {
   return (
     <section
       id="anchor"
-      className="bg-canvas-deep"
-      style={{ paddingBlock: "var(--gap-11xl)" }}
+      style={{ background: "var(--canvas-light)", paddingBlock: "var(--gap-11xl)" }}
     >
       <Container>
-        <p className="eyebrow text-text-muted mb-8">How we think about marketing</p>
+        <p className="eyebrow mb-8" style={{ color: "var(--text-on-light-muted)" }}>
+          How we think about marketing
+        </p>
 
         <div className="grid md:grid-cols-12 gap-10">
           <h2
-            className="md:col-span-7 font-sans text-text-strong text-balance"
-            style={{ fontSize: "clamp(36px, 5vw, 72px)", lineHeight: 1.05, fontWeight: 400, letterSpacing: "-0.01em" }}
+            className="md:col-span-7 font-sans text-balance"
+            style={{
+              fontSize: "clamp(36px, 5vw, 72px)",
+              lineHeight: 1.05,
+              fontWeight: 400,
+              letterSpacing: "-0.01em",
+              color: "var(--text-on-light)",
+            }}
           >
             Most agencies sell campaigns.{" "}
-            <em style={{ color: "var(--sage)" }}>We sell the gap between what your account is doing and what it could.</em>
+            <em style={{ color: "var(--moss)" }}>
+              We sell the gap between what your account is doing and what it could.
+            </em>
           </h2>
 
-          <div className="md:col-span-5 md:col-start-8 space-y-6 text-text-body">
+          <div
+            className="md:col-span-5 md:col-start-8 space-y-6"
+            style={{ color: "var(--text-on-light-muted)" }}
+          >
             <p>
               Every brief starts the same way: a quiet read of the numbers, the
               creative, the offer. Half the time the first answer is &ldquo;don&rsquo;t
@@ -36,7 +48,7 @@ export default function AnchorPhilosophy() {
               The rest of the time we run. Hard. Daily. With work you see
               before it ships and after it lands. No reporting theatre.
             </p>
-            <p className="text-text-strong">
+            <p style={{ color: "var(--text-on-light)" }}>
               You own everything we build for you at the end of the engagement.
             </p>
           </div>

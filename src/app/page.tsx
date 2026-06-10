@@ -5,12 +5,13 @@ import LogoMarquee from "@/components/sections/LogoMarquee";
 import HeroCollage from "@/components/sections/HeroCollage";
 import CapabilityNetwork from "@/components/sections/CapabilityNetwork";
 import HowWeWork from "@/components/sections/HowWeWork";
+import BriefFlow from "@/components/sections/BriefFlow";
 import AnchorPhilosophy from "@/components/sections/AnchorPhilosophy";
 import CinematicBreak from "@/components/sections/CinematicBreak";
 import SelectedWork from "@/components/sections/SelectedWork";
-import OrlaTestimonial from "@/components/sections/OrlaTestimonial";
+import HilaryTestimonial from "@/components/sections/HilaryTestimonial";
 import RiseGuarantee from "@/components/sections/RiseGuarantee";
-import CertifiedPartners from "@/components/sections/CertifiedPartners";
+import BuiltOn from "@/components/sections/BuiltOn";
 import ContactForm from "@/components/sections/ContactForm";
 import Footer from "@/components/sections/Footer";
 import WhatYouTakeWithYou from "@/components/sections/WhatYouTakeWithYou";
@@ -21,20 +22,21 @@ export default function Home() {
   return (
     <>
       <Nav />
-      <main className="flex-1" style={{ paddingTop: "var(--header-height)" }}>
+      <main className="flex-1">
         <Hero />
         <PlatformStrip />
         <LogoMarquee />
         <HeroCollage />
         <CapabilityNetwork />
         <HowWeWork />
+        <BriefFlow />
         <AnchorPhilosophy />
         <CinematicBreak />
         <SelectedWork />
-        <OrlaTestimonial />
+        <HilaryTestimonial />
         <RiseGuarantee />
         <WhatYouTakeWithYou />
-        <CertifiedPartners />
+        <BuiltOn />
         <ContactForm />
       </main>
       <Footer />

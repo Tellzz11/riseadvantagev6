@@ -1,13 +1,15 @@
 import Container from "./_Container";
 
-// OrlaTestimonial — flipped to CREAM. Sits between dark SelectedWork +
-// dark RiseGuarantee to create another cut per the Superside alternation.
+// HilaryTestimonial — flipped to SAGE-CREAM #E6ECD6 (Superside testimonials
+// section parallel, 2026-05-19). Sits between dark SelectedWork + dark
+// RiseGuarantee to keep the surface alternation. Hilary is H&O Gardening's
+// lead operator — name corrected from earlier draft (was Orla).
 
-export default function OrlaTestimonial() {
+export default function HilaryTestimonial() {
   return (
     <section
       style={{
-        background: "var(--canvas-light)",
+        background: "var(--canvas-sage)",
         paddingBlock: "var(--gap-10xl)",
       }}
     >
@@ -35,7 +37,7 @@ export default function OrlaTestimonial() {
           className="mt-8 text-sm"
           style={{ color: "var(--text-on-light-muted)" }}
         >
-          Orla — H&amp;O Gardening
+          Hilary — H&amp;O Gardening
         </footer>
       </Container>
     </section>

@@ -44,6 +44,12 @@
   --accent:           #F7F9F2;
   --accent-soft:      rgba(247, 249, 242, 0.5);
 
+  /* lime + sage borrowed from Superside (2026-05-19). Lime fires on
+     primary conversion CTAs only; sage is a section-surface variant. */
+  --accent-lime:      #D8FF85;
+  --accent-lime-hover:#C5F36A;
+  --canvas-sage:      #E6ECD6;
+
   /* text */
   --text-strong:      #F0F3E8;   /* headlines */
   --text-body:        #DDE1D2;   /* body — "slightly more off-white" */
@@ -126,9 +132,14 @@
   /* light alternation */
   --color-canvas-light:        var(--canvas-light);
   --color-canvas-light-soft:   var(--canvas-light-soft);
+  --color-canvas-sage:         var(--canvas-sage);
   --color-text-on-light:       var(--text-on-light);
   --color-text-on-light-muted: var(--text-on-light-muted);
   --color-text-on-light-faint: var(--text-on-light-faint);
+
+  /* lime accent — primary CTA only */
+  --color-accent-lime:       var(--accent-lime);
+  --color-accent-lime-hover: var(--accent-lime-hover);
 
   /* tonal greens */
   --color-moss:        var(--moss);
@@ -223,13 +234,82 @@
     letter-spacing: 0.15em;
   }
 
-  /* form input — single shared style for inputs/selects/textareas */
+  /* primary conversion CTA — lime pill, deep-teal text, sweep-on-hover */
+  .pill-cta-lime {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 26px;
+    border-radius: 999px;
+    background: var(--accent-lime);
+    color: var(--canvas);
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 1;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.2s ease;
+  }
+  .pill-cta-lime:hover {
+    background: var(--accent-lime-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 10px 24px rgba(216, 255, 133, 0.25);
+  }
+
+  /* hero §1.7 film grain — live-WebGL mode only (Direction A has it baked
+     into the encode). Same SVG turbulence tile as the render; CSS-stepped
+     position jumps animate it so it never reads as static dirt, and it
+     dithers the dark-teal falloff against banding. */
+  .hero-grain {
+    pointer-events: none;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+    opacity: 0.04;
+    mix-blend-mode: overlay;
+    animation: hero-grain-jump 0.9s steps(1) infinite;
+  }
+  @keyframes hero-grain-jump {
+    0% { background-position: 0px 0px; }
+    12.5% { background-position: 67px 31px; }
+    25% { background-position: 21px 96px; }
+    37.5% { background-position: 118px 54px; }
+    50% { background-position: 38px 122px; }
+    62.5% { background-position: 92px 8px; }
+    75% { background-position: 14px 71px; }
+    87.5% { background-position: 105px 109px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero-grain { animation: none; }
+  }
+
+  /* form input — playbook pills (WEB-BUILD-PLAYBOOK): cream-tinted fill,
+     border on focus only. Lives on the sage contact section, so the text
+     uses the dark on-light family for AA contrast. Single shared style
+     for inputs/selects/textareas; textareas relax the radius below. */
   .form-input {
-    @apply w-full rounded-lg border bg-canvas-soft px-4 py-3 text-text-strong placeholder:text-text-muted focus:outline-none focus:ring-2;
-    border-color: var(--border-strong);
-    --tw-ring-color: var(--accent-soft);
+    width: 100%;
+    border-radius: 999px;
+    border: 1px solid transparent;
+    background: var(--canvas-light);
+    padding: 14px 22px;
+    color: var(--text-on-light);
+    transition: border-color 0.15s ease, background 0.15s ease;
+  }
+  .form-input::placeholder {
+    color: var(--text-on-light-faint);
   }
   .form-input:focus {
-    border-color: var(--accent);
+    outline: none;
+    border-color: var(--text-on-light-muted);
+  }
+  textarea.form-input {
+    border-radius: 24px;
+  }
+  select.form-input {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5 6 6.5 11 1.5' fill='none' stroke='%235A6B5F' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 20px center;
+    padding-right: 48px;
   }
 }

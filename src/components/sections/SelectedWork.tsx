@@ -9,56 +9,86 @@ export default function SelectedWork() {
   return (
     <section
       id="selected-work"
-      className="bg-canvas"
-      style={{ paddingBlock: "var(--gap-10xl)" }}
+      style={{ background: "var(--canvas-light)", paddingBlock: "var(--gap-10xl)" }}
     >
       <Container>
-        <p className="eyebrow text-text-muted mb-8">Selected work</p>
+        <p className="eyebrow mb-8" style={{ color: "var(--text-on-light-muted)" }}>
+          Selected work
+        </p>
 
         <div className="grid md:grid-cols-12 gap-12 items-start">
           <div className="md:col-span-7">
             <h2
-              className="font-sans text-text-strong text-balance"
-              style={{ fontSize: "clamp(32px, 4.5vw, 60px)", lineHeight: 1.1, fontWeight: 400, letterSpacing: "-0.01em" }}
+              className="font-sans text-balance"
+              style={{
+                fontSize: "clamp(32px, 4.5vw, 60px)",
+                lineHeight: 1.1,
+                fontWeight: 400,
+                letterSpacing: "-0.01em",
+                color: "var(--text-on-light)",
+              }}
             >
               From <em>£21.60</em> to <em>£6.88</em> cost per lead in two weeks.
             </h2>
 
-            <p className="mt-8 text-text-body max-w-xl">
+            <p className="mt-8 max-w-xl" style={{ color: "var(--text-on-light-muted)" }}>
               H&amp;O Gardening — a London gardening business with a quiet
               existing offer and zero performance marketing in place. We
               rebuilt the funnel, ran a Meta + Google sweep, fixed the lead
               capture, and shipped weekly creative.
             </p>
 
-            <ul className="mt-8 space-y-3 text-text-muted text-sm">
-              <li>• Brand-led Meta video ads (no &ldquo;before/after slop&rdquo;)</li>
-              <li>• Custom GHL pipeline with notes + schedule + slot CRUD</li>
-              <li>• PWA lead tracker shipped to the owner&rsquo;s phone</li>
+            <ul className="mt-8 space-y-3 text-sm" style={{ color: "var(--text-on-light-muted)" }}>
+              <li>• Brand-led Meta video ads</li>
+              <li>• Custom GHL pipeline with notes, a schedule, and booking slots the owner can add, edit and reorder</li>
+              <li>• PWA lead tracker shipped to her phone</li>
             </ul>
           </div>
 
           <aside className="md:col-span-5 md:sticky md:top-32">
-            <div className="rounded-2xl border border-border bg-canvas-soft p-8">
-              <p className="eyebrow text-text-muted">Cost per lead</p>
+            <div
+              className="rounded-2xl p-8"
+              style={{
+                background: "var(--canvas-light-soft)",
+                border: "1px solid rgba(10,33,31,0.1)",
+              }}
+            >
+              <p className="eyebrow" style={{ color: "var(--text-on-light-muted)" }}>
+                Cost per lead
+              </p>
 
               <div className="mt-6 flex items-baseline justify-between gap-6">
                 <div>
-                  <p className="text-text-muted text-sm">Before</p>
-                  <p className="font-display italic text-text-strong line-through decoration-text-faint" style={{ fontSize: "clamp(40px, 4vw, 56px)", lineHeight: 1 }}>
+                  <p className="text-sm" style={{ color: "var(--text-on-light-muted)" }}>Before</p>
+                  <p
+                    className="font-display italic line-through"
+                    style={{
+                      fontSize: "clamp(40px, 4vw, 56px)",
+                      lineHeight: 1,
+                      color: "var(--text-on-light)",
+                      textDecorationColor: "var(--text-on-light-faint)",
+                    }}
+                  >
                     £21.60
                   </p>
                 </div>
-                <span aria-hidden className="text-text-faint">→</span>
+                <span aria-hidden style={{ color: "var(--text-on-light-faint)" }}>→</span>
                 <div className="text-right">
-                  <p className="text-text-muted text-sm">After</p>
-                  <p className="text-text-strong" style={{ fontSize: "clamp(48px, 5vw, 72px)", lineHeight: 1, fontWeight: 400 }}>
+                  <p className="text-sm" style={{ color: "var(--text-on-light-muted)" }}>After</p>
+                  <p
+                    style={{
+                      fontSize: "clamp(48px, 5vw, 72px)",
+                      lineHeight: 1,
+                      fontWeight: 400,
+                      color: "var(--text-on-light)",
+                    }}
+                  >
                     £6.88
                   </p>
                 </div>
               </div>
 
-              <p className="mt-8 text-text-body text-sm">
+              <p className="mt-8 text-sm" style={{ color: "var(--text-on-light-muted)" }}>
                 Two weeks of campaign work, lead tracker rebuild, and creative
                 rotation. Numbers from the H&amp;O Meta Ads Manager account.
               </p>

@@ -2,14 +2,12 @@
 
 import { ReactNode, useEffect } from "react";
 import Lenis from "lenis";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-// Lenis + GSAP ScrollTrigger handshake. ScrollTrigger drives off scroll events
-// which Lenis hijacks — without the .on('scroll', ScrollTrigger.update) wire
-// and the GSAP ticker driving Lenis.raf, pins detach at random offsets.
-
-gsap.registerPlugin(ScrollTrigger);
+// Lenis smooth scroll on a plain rAF loop. GSAP was removed in the hero perf
+// pass (audit B2): the only thing it did here was tick Lenis and call
+// ScrollTrigger.update — and nothing in the site uses ScrollTrigger. A direct
+// requestAnimationFrame wire is byte-for-byte equivalent behaviour minus
+// ~70KB of dead library weight.
 
 export default function SmoothScroll({ children }: { children: ReactNode }) {
   useEffect(() => {
@@ -25,16 +23,15 @@ export default function SmoothScroll({ children }: { children: ReactNode }) {
       syncTouch: false,
     });
 
-    lenis.on("scroll", ScrollTrigger.update);
-
-    const onTick = (time: number) => {
-      lenis.raf(time * 1000);
+    let raf = 0;
+    const onFrame = (time: number) => {
+      lenis.raf(time);
+      raf = requestAnimationFrame(onFrame);
     };
-    gsap.ticker.add(onTick);
-    gsap.ticker.lagSmoothing(0);
+    raf = requestAnimationFrame(onFrame);
 
     return () => {
-      gsap.ticker.remove(onTick);
+      cancelAnimationFrame(raf);
       lenis.destroy();
     };
   }, []);

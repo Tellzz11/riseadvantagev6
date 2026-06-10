@@ -1,0 +1,137 @@
+[
+  {
+    "file": "01-section-0.png",
+    "i": 0,
+    "id": "section-0",
+    "absTop": 0,
+    "left": 0,
+    "width": 1440,
+    "height": 810
+  },
+  {
+    "file": "02-section-1.png",
+    "i": 1,
+    "id": "section-1",
+    "absTop": 810,
+    "left": 0,
+    "width": 1440,
+    "height": 227
+  },
+  {
+    "file": "03-section-2.png",
+    "i": 2,
+    "id": "section-2",
+    "absTop": 1037,
+    "left": 0,
+    "width": 1440,
+    "height": 317
+  },
+  {
+    "file": "04-work-collage.png",
+    "i": 3,
+    "id": "work-collage",
+    "absTop": 1354,
+    "left": 0,
+    "width": 1440,
+    "height": 1568
+  },
+  {
+    "file": "05-what-we-do.png",
+    "i": 4,
+    "id": "what-we-do",
+    "absTop": 2922,
+    "left": 0,
+    "width": 1440,
+    "height": 1159
+  },
+  {
+    "file": "06-how-we-work.png",
+    "i": 5,
+    "id": "how-we-work",
+    "absTop": 4082,
+    "left": 0,
+    "width": 1440,
+    "height": 791
+  },
+  {
+    "file": "07-brief-flow.png",
+    "i": 6,
+    "id": "brief-flow",
+    "absTop": 4873,
+    "left": 0,
+    "width": 1440,
+    "height": 1185
+  },
+  {
+    "file": "08-anchor.png",
+    "i": 7,
+    "id": "anchor",
+    "absTop": 6058,
+    "left": 0,
+    "width": 1440,
+    "height": 870
+  },
+  {
+    "file": "09-cinematic-break.png",
+    "i": 8,
+    "id": "cinematic-break",
+    "absTop": 6928,
+    "left": 0,
+    "width": 1440,
+    "height": 729
+  },
+  {
+    "file": "10-selected-work.png",
+    "i": 9,
+    "id": "selected-work",
+    "absTop": 7657,
+    "left": 0,
+    "width": 1440,
+    "height": 736
+  },
+  {
+    "file": "11-section-10.png",
+    "i": 10,
+    "id": "section-10",
+    "absTop": 8393,
+    "left": 0,
+    "width": 1440,
+    "height": 527
+  },
+  {
+    "file": "12-section-11.png",
+    "i": 11,
+    "id": "section-11",
+    "absTop": 8920,
+    "left": 0,
+    "width": 1440,
+    "height": 507
+  },
+  {
+    "file": "13-take-with-you.png",
+    "i": 12,
+    "id": "take-with-you",
+    "absTop": 9427,
+    "left": 0,
+    "width": 1440,
+    "height": 1008
+  },
+  {
+    "file": "14-section-13.png",
+    "i": 13,
+    "id": "section-13",
+    "absTop": 10436,
+    "left": 0,
+    "width": 1440,
+    "height": 471
+  },
+  {
+    "file": "15-contact.png",
+    "i": 14,
+    "id": "contact",
+    "absTop": 10907,
+    "left": 0,
+    "width": 1440,
+    "height": 1041
+  }
+]

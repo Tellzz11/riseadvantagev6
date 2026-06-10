@@ -1,7 +1,8 @@
 import Container from "./_Container";
 
-// HowWeWork — flipped to CREAM. Pairs with WhatWeDo above to form a
-// 2-section cream "services + process" block per Superside §1.1.
+// HowWeWork — cream section, part of the light alternation block per
+// Superside §1.1. (WhatWeDo, its former pair, was cut from the page and
+// the unimported file deleted 2026-06-10.)
 // Audit ref: SUPERSIDE-AUDIT alternation pattern — blocks of 2-3 per colour.
 
 const STEPS: Array<{ n: string; title: string; outcome: string; body: string }> = [

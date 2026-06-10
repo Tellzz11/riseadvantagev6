@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import LogoLockup from "@/components/brand/LogoLockup";
 
 // Zero-nav per v6 carry-over §2. Logo left, one sticky CTA right, nothing
 // in the middle. CTA scrolls to #contact (form-only, no Calendly).
@@ -27,8 +28,18 @@ export default function Nav() {
     >
       <div className="mx-auto h-full flex items-center justify-between"
            style={{ maxWidth: "var(--container-max)", paddingInline: "var(--container-margin)" }}>
-        <Link href="/" className="font-display italic text-text-strong text-xl tracking-tight" aria-label="Rise Advantage home">
-          Rise<span className="not-italic font-sans text-text-muted"> · </span>Advantage
+        <Link
+          href="/"
+          aria-label="Rise Advantage home"
+          className="inline-flex items-center"
+        >
+          {/* Desktop / tablet: full lockup at 26px. Mobile (<375px): smaller. */}
+          <span className="hidden sm:inline-flex">
+            <LogoLockup variant="on-dark" size={26} />
+          </span>
+          <span className="sm:hidden inline-flex">
+            <LogoLockup variant="on-dark" size={22} />
+          </span>
         </Link>
 
         <a
