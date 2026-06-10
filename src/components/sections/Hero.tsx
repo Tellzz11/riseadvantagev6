@@ -1,20 +1,18 @@
 "use client";
 
 // ════════════════════════════════════════════════════════════════════════════
-// Hero — Direction B (live WebGL fragment-assembly) with the full §3.3
-// degradation ladder. Poster-first: the assembled "answer" frame is the LCP
-// element (fetchpriority=high); everything heavier hydrates AFTER load+idle.
+// Hero — Direction A (cinematic video loop) as the default, poster-first.
+// The assembled "answer" frame is the LCP element (fetchpriority=high); the
+// video hydrates AFTER load+idle. Direction B (live WebGL) is retained behind
+// the ?hero=webgl dev override only — Theo locked Direction A as the shipped
+// hero on 2026-06-10 (swapped from B).
 //
 // Ladder (first match wins):
-//   1. ?hero=poster|video|webgl   — dev override
+//   1. ?hero=poster|video|webgl   — dev override (webgl = preview Direction B)
 //   2. prefers-reduced-motion     → static poster
 //   3. Save-Data                  → static poster
 //   4. coarse pointer / ≤768px    → Direction A video (mobile encode)
-//   5. weak CPU/GPU heuristics    → Direction A video (desktop encode)
-//   6. WebGL probe fails / software renderer → Direction A video
-//   7. else                       → live WebGL (Direction B)
-// Plus the runtime FPS watchdog inside HeroCanvas: sustained sub-floor frame
-// rate swaps to the A video. Same seeded scene → the swap doesn't "jump".
+//   5. else                       → Direction A video (desktop encode)
 //
 // Copy is VERBATIM from the approved v5 hero. Eyebrow stays --sage: the §2.4
 // contrast gate was RUN against rendered pixels (scripts/check-hero-contrast
@@ -46,30 +44,9 @@ function decideMode(): Layer {
   };
   if (nav.connection?.saveData) return { mode: "poster", mobile };
 
-  if (mobile) return { mode: "video", mobile };
-
-  if ((nav.hardwareConcurrency ?? 8) <= 4 || (nav.deviceMemory ?? 8) <= 4)
-    return { mode: "video", mobile };
-
-  // WebGL probe — refuse software / caveat renderers
-  try {
-    const c = document.createElement("canvas");
-    const gl = (c.getContext("webgl2", { failIfMajorPerformanceCaveat: true }) ||
-      c.getContext("webgl", {
-        failIfMajorPerformanceCaveat: true,
-      })) as WebGLRenderingContext | null;
-    if (!gl) return { mode: "video", mobile };
-    const dbg = gl.getExtension("WEBGL_debug_renderer_info");
-    if (dbg) {
-      const renderer = String(gl.getParameter(dbg.UNMASKED_RENDERER_WEBGL) ?? "");
-      if (/swiftshader|llvmpipe|software|microsoft basic render/i.test(renderer))
-        return { mode: "video", mobile };
-    }
-  } catch {
-    return { mode: "video", mobile };
-  }
-
-  return { mode: "webgl", mobile };
+  // Direction A (video) is the shipped hero on every non-poster path. Direction
+  // B (live WebGL) is reachable only via the ?hero=webgl override above.
+  return { mode: "video", mobile };
 }
 
 export default function Hero() {

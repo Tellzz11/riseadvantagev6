@@ -2,16 +2,15 @@ import Image from "next/image";
 import Container from "./_Container";
 
 // WhatYouTakeWithYou — "the infrastructure you keep" moment.
-// 2026-06-10: the off-palette midnight-navy surface (#0A1628 — old v2
-// brief) is retired for BD-005 tokens (--canvas-deep / --canvas-soft) per
-// docs/research/imagery-specs-2026-06-10.md Asset 3a. Imagery upgraded to
-// crops of the BD-005-correct dashboard.webp / workflow.webp composites
-// (cream-tinted MacBook screens on the teal field — Asset 3b Option A).
-// Hosts TWO real-work assets — the dashboard you operate on day-to-day,
-// and the GHL workflow library that runs underneath it.
+// 2026-06-10 (evening): Theo REVERSED the integration pass's re-token of
+// this section to BD-005 teal. The midnight-navy surface (#0A1628/#0D2035)
+// is his deliberate off-palette character choice — restored exactly.
+// Operator decision: do NOT re-token to --canvas-deep/--canvas-soft again.
+// Imagery keeps the 2026-06-10 upgrade: real dashboard + GHL workflow
+// MacBook composites (only the surface colour reverted).
 
-const SURFACE = "var(--canvas-deep)";
-const INSET   = "var(--canvas-soft)";
+const SURFACE = "#0A1628"; // midnight navy — Theo's deliberate off-palette pick
+const INSET   = "#0D2035"; // navy + 1 step — figure plates + deliverable cells
 
 const DELIVERABLES = [
   { label: "Campaign account",   body: "Meta + Google + GHL accounts in your name, with the creative + audience structures we built." },
@@ -34,7 +33,7 @@ export default function WhatYouTakeWithYou() {
         <div className="grid gap-12 md:grid-cols-12 items-center">
           {/* Image column — two MacBook composites stacked. Both shown
               at their native ~1.52:1 aspect so nothing crops, sitting
-              directly on the canvas-deep surface (no card chrome). */}
+              directly on the navy surface (no card chrome). */}
           <div className="md:col-span-7 flex flex-col gap-5">
             <figure
               className="relative overflow-hidden rounded-2xl border"
@@ -55,7 +54,7 @@ export default function WhatYouTakeWithYou() {
               <figcaption
                 className="absolute left-5 top-5 inline-flex items-center gap-2 rounded-full px-3 py-1.5"
                 style={{
-                  background: "color-mix(in oklab, var(--canvas-deep) 70%, transparent)",
+                  background: `color-mix(in oklab, ${SURFACE} 70%, transparent)`,
                   border: "1px solid color-mix(in oklab, var(--text-body) 20%, transparent)",
                   backdropFilter: "blur(8px)",
                   fontFamily: "var(--font-mono), ui-monospace, monospace",
@@ -92,7 +91,7 @@ export default function WhatYouTakeWithYou() {
               <figcaption
                 className="absolute left-5 top-5 inline-flex items-center gap-2 rounded-full px-3 py-1.5"
                 style={{
-                  background: "color-mix(in oklab, var(--canvas-deep) 70%, transparent)",
+                  background: `color-mix(in oklab, ${SURFACE} 70%, transparent)`,
                   border: "1px solid color-mix(in oklab, var(--text-body) 20%, transparent)",
                   backdropFilter: "blur(8px)",
                   fontFamily: "var(--font-mono), ui-monospace, monospace",

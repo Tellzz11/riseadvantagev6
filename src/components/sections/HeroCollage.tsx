@@ -48,7 +48,7 @@ const TILES_TOP: Tile[] = [
   },
   {
     src: "/images/collage/tile-3-ipad-crm.png",
-    alt: "iPad on velvet surface showing a clean off-white CRM pipeline visualisation.",
+    alt: "iPad on a deep teal velvet surface showing the real Rise Advantage GHL inbound-pipeline dashboard, demo data populated for illustration.",
     eyebrow: "GHL · PIPELINES",
     caption: "Lifecycle pipelines built to read.",
     span: "md:col-span-5",

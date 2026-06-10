@@ -3,8 +3,11 @@
 // BriefFlow — Superside "One intelligent system" pattern (2026-05-19).
 // Green-blurred organic backdrop + glassy white card with vertical stepper.
 // Current step has a spinner — auto-advances on a 3.2s loop so the page feels
-// alive without scroll/click. 2026-06-10: completed steps are deep-teal fills
-// (not lime) — lime is reserved for conversion CTAs sitewide, per audit.
+// alive without scroll/click. 2026-06-10 (evening): Theo reversed the audit's
+// "lime = conversion CTAs only" dial-back FOR THIS CHECKLIST — completed steps
+// are lime fills again (dark tick coin, pale-lime active row), matching the
+// original 2026-05-21 look. Operator decision — do not re-apply the audit
+// rule here. The form's lime Next/Send buttons are unrelated and stay lime.
 
 import { useEffect, useState } from "react";
 import Container from "./_Container";
@@ -91,22 +94,22 @@ export default function BriefFlow() {
                       className="flex items-center gap-3 rounded-xl px-4 py-3 transition-all"
                       style={{
                         background: isDone
-                          ? "var(--text-on-light)"
+                          ? "var(--accent-lime)"
                           : isActive
-                          ? "rgba(10, 33, 31, 0.08)"
+                          ? "color-mix(in oklab, var(--accent-lime) 35%, var(--canvas-light))"
                           : "var(--canvas-light-soft)",
                         border: isActive
                           ? "1px solid rgba(10, 33, 31, 0.18)"
                           : "1px solid transparent",
-                        color: isDone ? "var(--canvas-light)" : "var(--text-on-light)",
+                        color: "var(--text-on-light)",
                       }}
                     >
                       <span
                         className="inline-flex h-5 w-5 items-center justify-center rounded-full"
                         style={{
-                          background: isDone ? "var(--canvas-light)" : "transparent",
+                          background: isDone ? "var(--text-on-light)" : "transparent",
                           border: isDone ? "none" : "1.5px solid var(--text-on-light-muted)",
-                          color: "var(--text-on-light)",
+                          color: isDone ? "var(--canvas-light)" : "var(--text-on-light)",
                           fontSize: 11,
                         }}
                         aria-hidden
