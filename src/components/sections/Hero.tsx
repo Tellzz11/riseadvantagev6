@@ -107,6 +107,45 @@ export default function Hero() {
     };
   }, [layer.mode]);
 
+  // ── iOS autoplay hardening ────────────────────────────────────────────────
+  // React sets `muted` as a DOM *property*; iOS Safari checks the muted
+  // *attribute* when deciding whether to permit autoplay, and for a video
+  // mounted dynamically (our case — it mounts after load+idle) it can see
+  // "not muted" and BLOCK autoplay, leaving the poster frozen. So we force the
+  // attribute + property + playsInline imperatively and call .play() ourselves.
+  // If autoplay is still policy-blocked (e.g. iOS Low Power Mode), we retry on
+  // the first user gesture so it recovers the moment they touch/scroll.
+  useEffect(() => {
+    if (layer.mode !== "video") return;
+    const video = videoRef.current;
+    if (!video) return;
+    video.muted = true;
+    video.defaultMuted = true;
+    video.setAttribute("muted", "");
+    video.playsInline = true;
+    video.setAttribute("playsinline", "");
+    let detach = () => {};
+    const tryPlay = () => {
+      const p = video.play();
+      if (p && typeof p.then === "function") p.catch(() => {});
+    };
+    const onGesture = () => {
+      tryPlay();
+      detach();
+    };
+    tryPlay();
+    const opts = { once: true, passive: true } as const;
+    window.addEventListener("touchstart", onGesture, opts);
+    window.addEventListener("pointerdown", onGesture, opts);
+    window.addEventListener("scroll", onGesture, opts);
+    detach = () => {
+      window.removeEventListener("touchstart", onGesture);
+      window.removeEventListener("pointerdown", onGesture);
+      window.removeEventListener("scroll", onGesture);
+    };
+    return detach;
+  }, [layer.mode]);
+
   const vidBase = layer.mobile ? "/hero-assemble-mobile" : "/hero-assemble";
   const posterJpg = layer.mobile
     ? "/hero-assemble-poster-mobile.jpg"

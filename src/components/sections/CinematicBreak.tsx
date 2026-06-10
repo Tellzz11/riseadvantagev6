@@ -16,6 +16,7 @@ import Container from "./_Container";
 
 export default function CinematicBreak() {
   const sectionRef = useRef<HTMLElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
   const [videoMounted, setVideoMounted] = useState(false);
   const [videoOn, setVideoOn] = useState(false); // fades in on canplay
 
@@ -41,6 +42,39 @@ export default function CinematicBreak() {
     return () => io.disconnect();
   }, []);
 
+  // iOS autoplay hardening — same rationale as Hero.tsx: force the muted
+  // *attribute* (React only sets the property) + playsInline, call .play()
+  // ourselves once the video mounts, and retry on first gesture for Low Power
+  // Mode. Without this the poster stays frozen on real iPhones.
+  useEffect(() => {
+    if (!videoMounted) return;
+    const video = videoRef.current;
+    if (!video) return;
+    video.muted = true;
+    video.defaultMuted = true;
+    video.setAttribute("muted", "");
+    video.playsInline = true;
+    video.setAttribute("playsinline", "");
+    let detach = () => {};
+    const tryPlay = () => {
+      const p = video.play();
+      if (p && typeof p.then === "function") p.catch(() => {});
+    };
+    const onGesture = () => {
+      tryPlay();
+      detach();
+    };
+    tryPlay();
+    const opts = { once: true, passive: true } as const;
+    window.addEventListener("touchstart", onGesture, opts);
+    window.addEventListener("pointerdown", onGesture, opts);
+    detach = () => {
+      window.removeEventListener("touchstart", onGesture);
+      window.removeEventListener("pointerdown", onGesture);
+    };
+    return detach;
+  }, [videoMounted]);
+
   return (
     <section
       ref={sectionRef}
@@ -65,6 +99,7 @@ export default function CinematicBreak() {
 
       {videoMounted && (
         <video
+          ref={videoRef}
           className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-90"
           style={{
             opacity: videoOn ? 0.9 : 0,
